@@ -5,7 +5,7 @@ nethserver-postgresql10
 PostgreSQL 10.0 comes from SCL: https://www.softwarecollections.org/en/scls/rhscl/rh-postgresql10/
 
 To avoid conflicts with nethserver-postgresql,
-the default instance of PostgreSQL 10.0 uses port **55100**.
+the default instance of PostgreSQL 10.0 uses port **55433**.
 
 Access policy
 =============
@@ -22,7 +22,7 @@ Form any other network:
 Example for accessing with postgres user: ::
 
    su - postgres
-   psql --port=55100
+   psql --port=55433
 
 
 Access PostgreSQL 10.0: ::
@@ -40,7 +40,7 @@ Example of backup action: ::
 
   #!/bin/bash
 
-  su - postgres -c "scl enable rh-postgresql10 -- pg_dump --port=55100 myapp > /var/lib/nethserver/myapp/myapp.sql"
+  su - postgres -c "scl enable rh-postgresql10 -- pg_dump --port=55433 myapp > /var/lib/nethserver/myapp/myapp.sql"
 
 
 Restore actions must be linked inside the ``post-restore-data`` event.
@@ -60,8 +60,8 @@ Example of restore action: ::
     echo "CREATE database myapp; CREATE USER sonicle WITH PASSWORD '$password'; GRANT ALL PRIVILEGES ON DATABASE myapp to myuser;" >> $drop_sql 
     # allow new connections to db
     echo "UPDATE pg_database SET datallowconn = 'true' WHERE datname = 'myapp';" >> $drop_sql
-    su - postgres -c "scl enable rh-postgresql10 -- psql --port=55100 < $drop_sql"
-    su - postgres -c "scl enable rh-postgresql10 -- psql --port=55100 myapp < /var/lib/nethserver/myapp/myapp.sql"
+    su - postgres -c "scl enable rh-postgresql10 -- psql --port=55433 < $drop_sql"
+    su - postgres -c "scl enable rh-postgresql10 -- psql --port=55433 myapp < /var/lib/nethserver/myapp/myapp.sql"
     rm -f $drop_sql
   fi
 

@@ -23,5 +23,5 @@
 source scl_source enable rh-postgresql10
 
 if [ ! -f /var/opt/rh/rh-postgresql10/lib/pgsql/data/postgresql.conf ]; then
-    postgresql-setup --initdb --port=55100
+    postgresql-setup --initdb --port=55433
 fi
