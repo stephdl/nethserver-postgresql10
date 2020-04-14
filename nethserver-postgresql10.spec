@@ -1,6 +1,6 @@
 Summary: NethServer PostgresSQL 10.0 configuration
 Name: nethserver-postgresql10
-Version: 1.0.0
+Version: 0.0.1
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -34,4 +34,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc COPYING
 %dir %{_nseventsdir}/%{name}-update
-
+%changelog
+* Mon Apr 13 2020 stephane de Labrusse <stephdl@de-labrusse.fr>
+- initial
